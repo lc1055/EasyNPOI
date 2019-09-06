@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNPOI", "src\EasyNPOI\Ea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "src\UnitTest\UnitTest.csproj", "{9C4B435A-94D3-4A88-BB0F-557CE99C18CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{9A5D6AAE-86A2-4873-9FB9-6F4EE18596A1}"
+	ProjectSection(SolutionItems) = preProject
+		docs\after.png = docs\after.png
+		docs\before.png = docs\before.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9DAECC28-4A67-41BC-BFD6-EC19C0A6230F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A7A971B-1ECF-4497-AAF6-9D243124D851} = {9DAECC28-4A67-41BC-BFD6-EC19C0A6230F}
+		{9C4B435A-94D3-4A88-BB0F-557CE99C18CB} = {9DAECC28-4A67-41BC-BFD6-EC19C0A6230F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8EA88DE5-5814-4D8B-AACE-6D2DEF5ABB0A}
