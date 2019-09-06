@@ -9,4 +9,10 @@ word excel export
 
 主要满足了同一个表格中既有表单字段，又有嵌套的列表。
 
+替换前：
 
+![Image text](https://github.com/lc1055/EasyNPOI/blob/master/docs/before.png)
+
+替换后：
+
+![Image_text](https://github.com/lc1055/EasyNPOI/blob/master/docs/after.png)
