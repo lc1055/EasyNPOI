@@ -127,8 +127,8 @@ namespace EasyNPOI.Services
                 //从每一行的第一个单元格字符数据，如果存在grid占位符中，则需要进行grid处理
                 var cells = row.GetTableCells();
                 var cell = cells[0];
-                var gridPlaceholderName = cell.GetText();
-                var gridReplacement = gridReplacements.FirstOrDefault(p => p.Placeholder == gridPlaceholderName);
+                var _gridPlaceholderName = cell.GetText();
+                var gridReplacement = gridReplacements.FirstOrDefault(p => p.Placeholder == _gridPlaceholderName);
                 if (gridReplacement != null && gridReplacement.Rows.Count > 0)
                 {
                     gridPlaceholderRowList.Add(new GridPlaceholderRow
@@ -144,7 +144,7 @@ namespace EasyNPOI.Services
                 else
                 {
                     //循环单元格
-                    foreach (XWPFTableCell ccell in row.GetTableCells())
+                    foreach (XWPFTableCell ccell in cells)
                     {
                         ReplaceInParagraphs(ccell.Paragraphs, basicReplacements);
                     }
@@ -220,21 +220,7 @@ namespace EasyNPOI.Services
             //遍历新行的每个单元格，进行赋值
             foreach (var cell in addedRow.GetTableCells())
             {
-                var _replace = cell.GetText();
-                var dataCell = dataRow.Cells.FirstOrDefault(p => p.Placeholder == _replace);
-                if (dataCell != null)
-                {
-                    if (dataCell.Type == Enums.PlaceholderTypeEnum.Text)
-                    {
-                        var p = cell.Paragraphs[0];
-                        ReplaceTextInRun(p, dataCell);
-                    }
-                    else if (dataCell.Type == Enums.PlaceholderTypeEnum.Picture)
-                    {
-                        var p = cell.Paragraphs[0];
-                        ReplacePictureInRun(p, dataCell);
-                    }
-                }
+                ReplaceInParagraphs(cell.Paragraphs, dataRow.Cells);
             }
         }
 
@@ -297,7 +283,7 @@ namespace EasyNPOI.Services
         private static void ReplaceTextInRun(XWPFParagraph paragraph, Models.Word.ReplacementBasic replace)
         {
             TextSegment ts = paragraph.SearchText(replace.Placeholder, new PositionInParagraph());
-            if (ts == null)
+            if (ts == null || ts.BeginRun == ts.EndRun)
             {
                 return;
             }
@@ -409,12 +395,13 @@ namespace EasyNPOI.Services
                 //段落属性
                 if (sourceCell.Paragraphs != null && sourceCell.Paragraphs.Count > 0)
                 {
-                    foreach (var sourceParagraph in sourceCell.Paragraphs)
+                    foreach (var sourcePa in sourceCell.Paragraphs)
                     {
-                        if (sourceParagraph.Runs != null && sourceParagraph.Runs.Count > 0)
+                        if (sourcePa.Runs != null && sourcePa.Runs.Count > 0)
                         {
                             var targetPa = targetCell.AddParagraph();
-                            foreach (var srcR in sourceParagraph.Runs)
+                            targetPa.Alignment = sourcePa.Alignment;
+                            foreach (var srcR in sourcePa.Runs)
                             {
                                 XWPFRun tarR = targetPa.CreateRun();
                                 tarR.SetText(srcR.Text);
