@@ -40,8 +40,8 @@ namespace UnitTest
                 },
                 Suppliers = new List<Supplier>
                 {
-                    new Supplier { Name = "京东", ContactUser = "刘强东", PhoneNumber = "12345678" },
-                    new Supplier { Name = "淘宝", ContactUser = "马云", PhoneNumber = "87654321" },
+                    //new Supplier { Name = "京东", ContactUser = "刘强东", PhoneNumber = "12345678" },
+                    //new Supplier { Name = "淘宝", ContactUser = "马云", PhoneNumber = "87654321" },
                 }
             };
 

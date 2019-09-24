@@ -129,7 +129,7 @@ namespace EasyNPOI.Services
                 var cell = cells[0];
                 var _gridPlaceholderName = cell.GetText();
                 var gridReplacement = gridReplacements.FirstOrDefault(p => p.Placeholder == _gridPlaceholderName);
-                if (gridReplacement != null && gridReplacement.Rows.Count > 0)
+                if (gridReplacement != null)
                 {
                     gridPlaceholderRowList.Add(new GridPlaceholderRow
                     {

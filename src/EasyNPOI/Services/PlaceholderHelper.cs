@@ -124,7 +124,7 @@ namespace EasyNPOI.Services
                         {
                             continue;
                         }
-                        if (list == null || list.Count() == 0)
+                        if (list == null)
                         {
                             continue;
                         }
