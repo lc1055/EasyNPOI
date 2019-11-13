@@ -24,9 +24,9 @@ namespace EasyNPOI.Services
                 throw new ArgumentNullException("路径为空");
             }
 
-            XWPFDocument word = NPOIHelper.GetXWPFDocument(tmplPath);
+            XWPFDocument word = NPOIWordHelper.GetXWPFDocument(tmplPath);
             ReplacePlaceholders(word, wordData);
-            NPOIHelper.SaveXWPFDocument(savePath, word);
+            NPOIWordHelper.SaveXWPFDocument(savePath, word);
         }
 
 
@@ -44,7 +44,7 @@ namespace EasyNPOI.Services
             var basicReplacements = PlaceholderHelper.GetBasicReplacements(wordData);
             var gridReplacements = PlaceholderHelper.GetGridReplacements(wordData);
 
-            NPOIHelper.ReplaceInWord(word, basicReplacements, gridReplacements);
+            NPOIWordHelper.ReplaceInWord(word, basicReplacements, gridReplacements);
         }
 
 

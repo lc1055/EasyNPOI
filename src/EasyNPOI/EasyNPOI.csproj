@@ -56,14 +56,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ColNameAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
+    <Compile Include="Enums\ExcelFileTypeEnum.cs" />
     <Compile Include="Enums\PictureTypeEnum.cs" />
     <Compile Include="Enums\PlaceholderTypeEnum.cs" />
+    <Compile Include="Models\Excel\ExportOption.cs" />
     <Compile Include="Models\Word\Picture.cs" />
     <Compile Include="Models\Word\Replacement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ExcelExportService.cs" />
+    <Compile Include="Services\IExcelExportService.cs" />
     <Compile Include="Services\IWordExportService.cs" />
-    <Compile Include="Services\NPOIHelper.cs" />
+    <Compile Include="Services\NPOIExcelHelper.cs" />
+    <Compile Include="Services\NPOIWordHelper.cs" />
     <Compile Include="Services\PlaceholderHelper.cs" />
     <Compile Include="Services\WordExportService.cs" />
   </ItemGroup>

@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace EasyNPOI.Services
 {
-    public static class NPOIHelper
+    public static class NPOIWordHelper
     {
         //在NPOI中，每厘米对应的长度数值
         private const int NPOI_PICTURE_LENGTH_EVERY_CM = 360144;
