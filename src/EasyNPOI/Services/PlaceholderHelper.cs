@@ -1,6 +1,7 @@
 ﻿using EasyNPOI.Attributes;
 using EasyNPOI.Models.Word;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -115,10 +116,10 @@ namespace EasyNPOI.Services
                     if (typeof(List<>).IsAssignableFrom(prop.PropertyType.GetGenericTypeDefinition()))
                     {
                         var objectList = prop.GetValue(wordData);
-                        IEnumerable<object> list = null;
+                        IEnumerable list = null;
                         try
                         {
-                            list = objectList as IEnumerable<object>;
+                            list = objectList as IEnumerable;
                         }
                         catch (Exception)
                         {
