@@ -72,7 +72,8 @@ namespace EasyNPOI.Services
         public static List<Models.Word.ReplacementBasic> GetBasicReplacements<T>(T wordData) where T : class, new()
         {
             var replacements = new List<Models.Word.ReplacementBasic>();
-            Type type = typeof(T);
+            //Type type = typeof(T);
+            Type type = wordData.GetType();
             PropertyInfo[] props = type.GetProperties();
             foreach (PropertyInfo prop in props)
             {
@@ -95,7 +96,8 @@ namespace EasyNPOI.Services
         public static List<Models.Word.ReplacementGrid> GetGridReplacements<T>(T wordData) where T : class, new()
         {
             var replacements = new List<Models.Word.ReplacementGrid>();
-            Type type = typeof(T);
+            //Type type = typeof(T);
+            Type type = wordData.GetType();
             PropertyInfo[] props = type.GetProperties();
 
             foreach (PropertyInfo prop in props)

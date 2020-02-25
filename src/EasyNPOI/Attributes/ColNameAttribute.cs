@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace EasyNPOI.Attributes
 {
     /// <summary>
-    /// 列名
+    /// Excel列名
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class ColNameAttribute : Attribute
