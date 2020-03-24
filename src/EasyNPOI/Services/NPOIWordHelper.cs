@@ -375,6 +375,7 @@ namespace EasyNPOI.Services
                 table.CreateRow();
             }
             XWPFTableRow targetRow = table.InsertNewTableRow(rowIndex);
+            table.RemoveRow(rowIndex + 1);
 
             //复制行属性
             targetRow.GetCTRow().trPr = sourceRow.GetCTRow().trPr;
