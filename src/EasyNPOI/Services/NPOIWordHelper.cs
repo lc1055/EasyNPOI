@@ -370,12 +370,17 @@ namespace EasyNPOI.Services
         public static XWPFTableRow CopyRow(XWPFTableRow sourceRow, XWPFTable table, int rowIndex)
         {
             //在表格指定位置新增一行
+            var needRemove = false;
             if (table.NumberOfRows <= rowIndex)
             {
                 table.CreateRow();
+                needRemove = true;
             }
             XWPFTableRow targetRow = table.InsertNewTableRow(rowIndex);
-            table.RemoveRow(rowIndex + 1);
+            if (needRemove)
+            {
+                table.RemoveRow(rowIndex + 1);
+            }
 
             //复制行属性
             targetRow.GetCTRow().trPr = sourceRow.GetCTRow().trPr;
