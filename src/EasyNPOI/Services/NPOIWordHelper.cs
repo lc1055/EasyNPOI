@@ -115,11 +115,11 @@ namespace EasyNPOI.Services
             //存放所有grid占位符的行对象
             List<GridPlaceholderRow> gridPlaceholderRowList = new List<GridPlaceholderRow>();
             var _thisIsTempRowIndex = -1;
+            var _rowIndex = 0;
             foreach (XWPFTableRow row in rows)
             {
-                var idx = rows.IndexOf(row);
                 //遇到模板行跳出循环
-                if (idx == _thisIsTempRowIndex)
+                if (_rowIndex == _thisIsTempRowIndex)
                 {
                     continue;
                 }
@@ -133,13 +133,13 @@ namespace EasyNPOI.Services
                 {
                     gridPlaceholderRowList.Add(new GridPlaceholderRow
                     {
-                        index = idx,
+                        index = _rowIndex,
                         row = row,
                         replacement = gridReplacement
                     });
 
                     //标记下一行就是模板行
-                    _thisIsTempRowIndex = idx++;
+                    _thisIsTempRowIndex = _rowIndex + 1;
                 }
                 else
                 {
@@ -149,6 +149,7 @@ namespace EasyNPOI.Services
                         ReplaceInParagraphs(ccell.Paragraphs, basicReplacements);
                     }
                 }
+                _rowIndex++;
             }
             _thisIsTempRowIndex = -1;
 
@@ -172,7 +173,7 @@ namespace EasyNPOI.Services
                     if (tmplRowCells.Count <= 0) continue;
                     //不含有占位符
                     var first_cell_text = tmplRowCells[0].GetText();
-                    string regEx = "\\{.+?\\}";
+                    string regEx = @"\{.+?\}";
                     Regex r = new Regex(regEx);
                     var matched = r.IsMatch(first_cell_text);
                     if (!matched) continue;
@@ -241,16 +242,15 @@ namespace EasyNPOI.Services
         /// <param name="pictureReplacements"></param>
         public static void ReplaceInParagraph(XWPFParagraph paragraph, List<Models.Word.ReplacementBasic> basicReplacements)
         {
-            if (paragraph == null)
+            if (paragraph == null || string.IsNullOrWhiteSpace(paragraph.Text))
             {
                 return;
             }
 
             //用正则判断段落里是否含有占位符
-            var xWPFParagraphText = paragraph.Text;
-            string regEx = "\\{.+?\\}";
+            string regEx = @"\{.+?\}";
             Regex r = new Regex(regEx);
-            var matched = r.IsMatch(xWPFParagraphText);
+            var matched = r.IsMatch(paragraph.Text);
             if (!matched)
             {
                 return;
@@ -268,6 +268,13 @@ namespace EasyNPOI.Services
                     {
                         ReplacePictureInRun(paragraph, replace);
                     }
+
+                    //再次用正则判断段落里是否含有占位符
+                    matched = r.IsMatch(paragraph.Text);
+                    if (!matched)
+                    {
+                        return;
+                    }
                 }
             }
 
@@ -282,6 +289,12 @@ namespace EasyNPOI.Services
         /// <param name="replace"></param>
         private static void ReplaceTextInRun(XWPFParagraph paragraph, Models.Word.ReplacementBasic replace)
         {
+            TextSegment split = paragraph.SearchText("{ }", new PositionInParagraph());
+            if (split != null)
+            {
+                paragraph.ReplaceText("{ }", "");
+            }
+
             TextSegment ts = paragraph.SearchText(replace.Placeholder, new PositionInParagraph());
             if (ts == null || ts.BeginRun == ts.EndRun)
             {
@@ -350,7 +363,16 @@ namespace EasyNPOI.Services
             //然后清空所有run
             for (int i = beginIndex; i <= endIndex; i++)
             {
-                runs[i].SetText("", 0);
+                var run = runs[i];
+                if (run.Text.Contains(replace.Placeholder))
+                {
+                    var runText = run.Text.Replace(replace.Placeholder, "");
+                    run.SetText(runText, 0);
+                }
+                else
+                {
+                    run.SetText("", 0);
+                }
             }
 
             //利用递归处理同一个占位符
