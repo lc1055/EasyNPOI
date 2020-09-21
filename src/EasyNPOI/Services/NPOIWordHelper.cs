@@ -121,6 +121,7 @@ namespace EasyNPOI.Services
                 //遇到模板行跳出循环
                 if (_rowIndex == _thisIsTempRowIndex)
                 {
+                    _thisIsTempRowIndex = -1;
                     continue;
                 }
 
@@ -296,7 +297,7 @@ namespace EasyNPOI.Services
             }
 
             TextSegment ts = paragraph.SearchText(replace.Placeholder, new PositionInParagraph());
-            if (ts == null || ts.BeginRun == ts.EndRun)
+            if (ts == null || !(ts.BeginRun != ts.EndRun || ts.BeginChar != ts.EndChar))
             {
                 return;
             }
