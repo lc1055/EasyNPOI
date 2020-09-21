@@ -41,6 +41,26 @@ namespace UnitTest
             File.WriteAllBytes(fileUrl, bytes);
         }
 
+
+        /// <summary>
+        /// 替换excel中的占位符为图片，目前替换后的图片只能占满整格，使用场景有限。
+        /// 当然，如果是纯文字替换的话，是没有问题的。修改Replacement类中的属性和相关代码就行了。
+        /// </summary>
+        [TestMethod]
+        public void TestReplaceExcelStr()
+        {
+            var path = @"d:\123\111.xlsx";
+            var placeholderList = new List<EasyNPOI.Models.Excel.Replacement>
+            {
+                new EasyNPOI.Models.Excel.Replacement{ Placeholder="{ss}", PictureUrl=@"d:\123\heihei.png" },
+                new EasyNPOI.Models.Excel.Replacement{ Placeholder="{tt}", PictureUrl=@"d:\123\heihei.png" },
+            };
+
+            EasyNPOI.Services.ExcelExportService srv = new EasyNPOI.Services.ExcelExportService();
+            srv.ReplaceAsync(path, placeholderList);
+
+        }
+
     }
 
 

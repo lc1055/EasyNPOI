@@ -33,6 +33,19 @@ namespace EasyNPOI.Services
             return Task.FromResult(workbookBytes);
         }
 
+        /// <summary>
+        /// 简单实现图片替换
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="replacements"></param>
+        /// <returns></returns>
+        public Task<string> ReplaceAsync(string path, List<EasyNPOI.Models.Excel.Replacement> replacements)
+        {
+            NPOIExcelHelper helper = new NPOIExcelHelper();
+            helper.ReplacePlaceholders(path, replacements);
+            return Task.FromResult("");
+        }
+
     }
 
 

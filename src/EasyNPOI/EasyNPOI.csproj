@@ -62,6 +62,7 @@
     <Compile Include="Enums\PictureTypeEnum.cs" />
     <Compile Include="Enums\PlaceholderTypeEnum.cs" />
     <Compile Include="Models\Excel\ExportOption.cs" />
+    <Compile Include="Models\Excel\Replacement.cs" />
     <Compile Include="Models\Word\Picture.cs" />
     <Compile Include="Models\Word\Replacement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
