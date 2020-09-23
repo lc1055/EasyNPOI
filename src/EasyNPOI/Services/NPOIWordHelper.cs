@@ -122,6 +122,7 @@ namespace EasyNPOI.Services
                 if (_rowIndex == _thisIsTempRowIndex)
                 {
                     _thisIsTempRowIndex = -1;
+                    _rowIndex++;
                     continue;
                 }
 
