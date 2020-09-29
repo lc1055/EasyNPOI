@@ -16,7 +16,7 @@ namespace EasyNPOI.Models.Word
         public Stream PictureData { get; set; }
 
         /// <summary>
-        /// 图片绝对地址（如果PictureData不为空则不用传）
+        /// 图片绝对地址（后续程序会将此路径文件转为 <see cref="PictureData"/>）
         /// </summary>
         public string PictureUrl { get; set; }
 
@@ -26,9 +26,9 @@ namespace EasyNPOI.Models.Word
         public PictureTypeEnum PictureType { get; set; } = PictureTypeEnum.PNG;
 
         /// <summary>
-        /// 文件名，默认“picture”
+        /// 图片文件名。若设置了，则当图片不存在时，会显示此文本
         /// </summary>
-        public string FileName { get; set; } = "picture";
+        public string FileName { get; set; } = "";
 
         /// <summary>
         /// 图片宽度，单位厘米，默认14

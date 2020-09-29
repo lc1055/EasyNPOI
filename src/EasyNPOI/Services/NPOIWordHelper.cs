@@ -291,6 +291,11 @@ namespace EasyNPOI.Services
         /// <param name="replace"></param>
         private static void ReplaceTextInRun(XWPFParagraph paragraph, Models.Word.ReplacementBasic replace)
         {
+            if(replace == null || replace.Type != Enums.PlaceholderTypeEnum.Text || string.IsNullOrWhiteSpace(paragraph.Text))
+            {
+                return;
+            }
+
             TextSegment split = paragraph.SearchText("{ }", new PositionInParagraph());
             if (split != null)
             {
@@ -316,13 +321,16 @@ namespace EasyNPOI.Services
         /// <param name="replace"></param>
         private static void ReplacePictureInRun(XWPFParagraph paragraph, Models.Word.ReplacementBasic replace)
         {
-            if (replace == null)
+            if (replace == null || replace.Type != Enums.PlaceholderTypeEnum.Picture || string.IsNullOrWhiteSpace(paragraph.Text))
             {
                 return;
             }
             var picList = replace.Pictures;
             if (picList == null || picList.Count() == 0)
             {
+                replace.Text = "";
+                replace.Type = Enums.PlaceholderTypeEnum.Text;
+                ReplaceTextInRun(paragraph, replace);
                 return;
             }
             TextSegment ts = paragraph.SearchText(replace.Placeholder, new PositionInParagraph());
@@ -351,7 +359,11 @@ namespace EasyNPOI.Services
                     }
                 }
 
-                if (pictureData == null || pictureData.Length == 0) continue;
+                if (pictureData == null || pictureData.Length == 0)
+                {
+                    begin_run.AppendText(picture.FileName);
+                    continue;
+                }
 
                 int height = (int)(Math.Ceiling(picture.Height * NPOI_PICTURE_LENGTH_EVERY_CM));
                 int width = (int)(Math.Ceiling(picture.Width * NPOI_PICTURE_LENGTH_EVERY_CM));

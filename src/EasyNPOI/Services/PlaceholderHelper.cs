@@ -38,14 +38,22 @@ namespace EasyNPOI.Services
                 List<Picture> pictures = new List<Picture>();
                 if (prop.PropertyType == typeof(Picture))
                 {
-                    var picture = (Picture)prop.GetValue(data);
                     //将单张图片对象也统一成列表
-                    pictures = new List<Picture>() { picture };
+                    var picture = (Picture)prop.GetValue(data);
+                    if(picture != null)
+                    {
+                        pictures = new List<Picture>() { picture };
+                    }
                 }
 
                 if (typeof(List<Picture>).IsAssignableFrom(prop.PropertyType))
                 {
-                    pictures = (List<Picture>)prop.GetValue(data);              
+                    pictures = (List<Picture>)prop.GetValue(data);
+                }
+
+                if (pictures == null)
+                {
+                    pictures = new List<Picture>();
                 }
                 return new ReplacementBasic { Placeholder = placeholder, Pictures = pictures, Type = Enums.PlaceholderTypeEnum.Picture };
             }

@@ -26,10 +26,10 @@ namespace UnitTest
                 User = "马化腾",
                 Date = DateTime.Now,
                 Note = "老司机开车",
-                Check = new EasyNPOI.Models.Word.Picture { PictureUrl = picturePath },
+                Check = new EasyNPOI.Models.Word.Picture { PictureUrl = "", FileName = "审核人" },
                 Approve = new List<EasyNPOI.Models.Word.Picture>
                 {
-                    new EasyNPOI.Models.Word.Picture { PictureUrl = picturePath, },
+                    new EasyNPOI.Models.Word.Picture { PictureUrl = "", FileName = "批准人", },
                     new EasyNPOI.Models.Word.Picture { PictureUrl = picturePath, }
                 },
                 Items = new List<Item>
