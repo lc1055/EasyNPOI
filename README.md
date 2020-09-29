@@ -1,7 +1,7 @@
 # EasyNPOI
 word excel export
 
-借鉴自 https://github.com/holdengong/EasyOffice 这是core环境的。
+借鉴自 https://github.com/holdengong/EasyOffice 这是.net core环境的。
 
 公司很多项目跑在.net fx4上，写了一个通用的word模板导出。
 
@@ -16,3 +16,11 @@ word excel export
 替换后：
 
 ![Image_text](https://github.com/lc1055/EasyNPOI/blob/master/docs/after.png)
+
+
+=========================================================================================
+
+依赖 
+
+NPOI 2.4
+ICSharpCode.SharpZipLib 0.86
