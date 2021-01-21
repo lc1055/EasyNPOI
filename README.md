@@ -11,11 +11,11 @@ word excel export
 
 替换前：
 
-![Image text](https://github.com/lc1055/EasyNPOI/blob/master/docs/before.png)
+![Image before replace](https://github.com/lc1055/EasyNPOI/blob/master/docs/before.png)
 
 替换后：
 
-![Image_text](https://github.com/lc1055/EasyNPOI/blob/master/docs/after.png)
+![Image after replace](https://github.com/lc1055/EasyNPOI/blob/master/docs/after.png)
 
 
 =========================================================================================
